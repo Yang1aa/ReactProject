@@ -9,14 +9,15 @@ import logo from './images/logo.webp'
 import mp4 from './images/bg.mp4'
 
 export default class Login extends Component {
-  onFinish = (values) => {
-    console.log('Received values of form: ', values);
+  onFinish = async (values) => {
     const { username, password } = values;
-    reqLogin(username, password).then(response => {
-      console.log('成功', response.data)
-    }).catch(error => {
-      console.log('失败', error)
-    })
+    try {
+      const response = await reqLogin(username, password);
+      console.log('成功了', response);
+    } catch (error) {
+      console.log('失败了', error);
+
+    }
   };
   render() {
     return (
