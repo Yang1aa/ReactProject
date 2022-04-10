@@ -1,10 +1,21 @@
 import axios from "axios";
+import { message } from "antd";
 
 export function ajax(url, params = {}, method) {
-    if (method.toLowerCase === 'get') {
-        return axios.get(url, params = {
-            ...params
+    return new Promise((resolve, reject) => {
+        let promise;
+        if (method.toLowerCase === 'get') {
+            promise = axios.get(url, params = {
+                ...params
+            })
+        } else
+            promise = axios.post(url, params)
+        promise.then((response) => {
+            resolve(response.data)
         })
-    } else
-        return axios.post(url, params)
+        promise.catch((error) => {
+            message.error(error)
+        })
+    })
+
 }
