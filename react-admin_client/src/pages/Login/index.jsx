@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { useNavigate, } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { reqLogin } from '../../api';
+import memoryUtils from '../../utils/memoryUtils'
+import localUtils from '../../utils/localUtils';
 
 import './index.css'
 import logo from './images/logo.webp'
@@ -16,11 +18,19 @@ const Login = () => {
     const result = await reqLogin(username, password);
     if (result.status === 0) {
       message.success("登陆成功！");
-      navigate('/')
+      console.log('data', result.data);
+      memoryUtils.user = result.data;
+      localUtils.setUser(result.data);
+      navigate('/', { replace: true });
     } else {
       message.error(result.msg);
     }
   };
+  useEffect(() => {
+    if (JSON.stringify(memoryUtils.user) !== '{}') {
+      navigate('/');
+    }
+  })
 
   return (
     <div>
