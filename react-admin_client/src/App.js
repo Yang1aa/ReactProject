@@ -7,14 +7,12 @@ import Admin from './pages/Admin';
 const App = () => {
 
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/login' element={<Login />} />
-          <Route path='/' element={<Admin />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/login' element={<Login />} />
+        <Route path='/*' element={<Admin />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
