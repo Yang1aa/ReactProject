@@ -1,23 +1,32 @@
 import React from 'react'
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
-import {
-    UserOutlined,
-    ShoppingCartOutlined,
-    ShopOutlined,
-    ShoppingOutlined,
-    BarChartOutlined,
-    SettingOutlined,
-    FundOutlined,
-    HomeOutlined,
-    PieChartOutlined,
-    LineChartOutlined,
-} from '@ant-design/icons';
 
+import menuList from '../../config/menuConfig';
 import logo from "../../pages/Login/images/logo.webp"
 import "./index.css"
 const { SubMenu } = Menu;
 const Nav = () => {
+    const getMenuNodes = (menuList) => {
+        return menuList.map((item) => {
+            if (!item.children) {
+                return (
+                    <Menu.Item key={item.key} icon={item.icon}>
+                        <Link to={item.key}>{item.title}</Link>
+                    </Menu.Item>
+                )
+            } else {
+                return (
+                    <SubMenu key={item.key} icon={item.icon} title={item.title}>
+                        {
+                            getMenuNodes(item.children)
+                        }
+                    </SubMenu>
+
+                )
+            }
+        })
+    }
     return (
         <div style={{ height: '100%' }}>
             <header>
@@ -30,40 +39,13 @@ const Nav = () => {
             </header>
             <div style={{ width: 200 }}>
                 <Menu
-                    defaultSelectedKeys={['HomeOutlined']}
-                    defaultOpenKeys={['sub1']}
+                    defaultSelectedKeys={['/']}
                     mode="inline"
                     theme="dark"
                 >
-                    <Menu.Item key="HomeOutlined" icon={<HomeOutlined />}>
-                        <Link to='/'>首页</Link>
-                    </Menu.Item>
-                    <SubMenu key="ShoppingCartOutlined" icon={<ShoppingCartOutlined />} title="商品">
-                        <Menu.Item key="category" icon={<ShoppingOutlined />}>
-                            <Link to='/category'>商品类型</Link>
-                        </Menu.Item>
-                        <Menu.Item key="product" icon={<ShopOutlined />}>
-                            <Link to='/product'>商品管理</Link>
-                        </Menu.Item>
-                    </SubMenu>
-                    <Menu.Item key="UserOutlined" icon={<UserOutlined />}>
-                        <Link to='/user'>用户管理</Link>
-                    </Menu.Item>
-                    <Menu.Item key="SettingOutlined" icon={<SettingOutlined />}>
-                        <Link to='/role'>角色管理</Link>
-                    </Menu.Item>
-
-                    <SubMenu key="FundOutlined" icon={<FundOutlined />} title="图形图表">
-                        <Menu.Item key="PieChartOutlined" icon={<PieChartOutlined />}>
-                            <Link to='/charts/pie'>饼状图</Link>
-                        </Menu.Item>
-                        <Menu.Item key="BarChartOutlined" icon={<BarChartOutlined />}>
-                            <Link to='/charts/bar'>柱状图</Link>
-                        </Menu.Item>
-                        <Menu.Item key="LineChartOutlined" icon={<LineChartOutlined />}>
-                            <Link to='/charts/line'>折线图</Link>
-                        </Menu.Item>
-                    </SubMenu>
+                    {
+                        getMenuNodes(menuList)
+                    }
                 </Menu>
             </div>
         </div>

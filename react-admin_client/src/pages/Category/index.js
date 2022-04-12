@@ -1,5 +1,4 @@
-const Category = (props)=>{
-    console.log('props',props)
+const Category = ()=>{
     return(
         <div>
             Category

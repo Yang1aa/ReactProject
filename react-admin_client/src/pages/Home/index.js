@@ -1,5 +1,4 @@
-const Home = (props)=>{
-    console.log('props',props)
+const Home = ()=>{
     return(
         <div>
             首页
