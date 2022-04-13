@@ -6,7 +6,6 @@ import memoryUtils from '../../utils/memoryUtils'
 
 import Nav from '../../components/Nav';
 import Header from '../../components/Header';
-// import Content from '../../components/Content';
 
 import Home from '../Home'
 import Category from '../Category'
@@ -34,7 +33,7 @@ const Admin = () => {
       </Sider>
       <Layout>
         <Header />
-        <Content>
+        <Content style={{margin:'10px 10px',backgroundColor:'white'}}>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/category' element={<Category />} />

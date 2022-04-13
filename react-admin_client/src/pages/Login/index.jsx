@@ -18,7 +18,6 @@ const Login = () => {
     const result = await reqLogin(username, password);
     if (result.status === 0) {
       message.success("登陆成功！");
-      console.log('data', result.data);
       memoryUtils.user = result.data;
       localUtils.setUser(result.data);
       navigate('/', { replace: true });

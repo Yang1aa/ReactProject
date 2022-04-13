@@ -1,0 +1,61 @@
+.admin-header {
+    height: 80px;
+    background-color: rgb(255, 255, 255);
+}
+
+.admin-header .top {
+    height: 40px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 30px;
+    border-bottom: 2px solid rgb(0, 217, 255);
+}
+
+.admin-header .top .user-message {
+    margin: 0 10px;
+}
+
+.admin-header .top .user-exit {
+    color: green;
+    font-weight: bold;
+}
+
+.top .user-exit:hover {
+    cursor: pointer;
+    color: red;
+    border-bottom: 1px solid red;
+}
+
+.admin-header .bottom {
+    height: 40px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 30px;
+}
+
+.bottom .bottom-left {
+    flex: 2;
+    position: relative;
+    background-color: white;
+    text-align: center;
+    font-size: 16px;
+}
+
+.bottom .bottom-left::after {
+    content: '';
+    border-top: 10px solid rgb(0, 217, 255);
+    border-right: 20px solid rgb(0, 225, 255, 0);
+    border-bottom: 20px solid rgb(208, 255, 0, 0);
+    border-left: 20px solid rgb(255, 102, 0, 0);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 30%);
+}
+
+.bottom .bottom-right {
+    flex: 8;
+    background-color: white;
+    text-align: right;
+    margin-left: 10px;
+}

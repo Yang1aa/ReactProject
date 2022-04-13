@@ -8,7 +8,6 @@ import "./index.css"
 const { SubMenu } = Menu;
 const Nav = () => {
     const uselocation = useLocation();
-    console.log('useLocation', uselocation)
     const [selectPath] = useState(uselocation.pathname);
     let open = ''
     const getMenuNodes = (menuList) => {
@@ -23,10 +22,8 @@ const Nav = () => {
                 const path = item.children.find(it =>
                     it.key === uselocation.pathname
                 )
-                if (path) {
+                if (path)
                     open = item.key;
-                    console.log('openKeys', item.key)
-                }
                 return (
                     <SubMenu key={item.key} icon={item.icon} title={item.title}>
                         {
