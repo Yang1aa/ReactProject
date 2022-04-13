@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Menu } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import menuList from '../../config/menuConfig';
 import logo from "../../pages/Login/images/logo.webp"
 import "./index.css"
 const { SubMenu } = Menu;
 const Nav = () => {
+    const uselocation = useLocation();
+    console.log('useLocation', uselocation)
+    const [selectPath] = useState(uselocation.pathname);
+    let open = ''
     const getMenuNodes = (menuList) => {
         return menuList.map((item) => {
             if (!item.children) {
@@ -16,6 +20,13 @@ const Nav = () => {
                     </Menu.Item>
                 )
             } else {
+                const path = item.children.find(it =>
+                    it.key === uselocation.pathname
+                )
+                if (path) {
+                    open = item.key;
+                    console.log('openKeys', item.key)
+                }
                 return (
                     <SubMenu key={item.key} icon={item.icon} title={item.title}>
                         {
@@ -27,19 +38,19 @@ const Nav = () => {
             }
         })
     }
+    getMenuNodes(menuList);
     return (
         <div style={{ height: '100%' }}>
             <header>
                 <div className="header">
-                    <Link to='/'>
-                        <img src={logo} alt="logo" className="header-img"></img>
-                        <span className="header-span">后台管理</span>
-                    </Link>
+                    <img src={logo} alt="logo" className="header-img"></img>
+                    <span className="header-span">后台管理</span>
                 </div>
             </header>
             <div style={{ width: 200 }}>
                 <Menu
-                    defaultSelectedKeys={['/']}
+                    defaultSelectedKeys={[selectPath]}
+                    defaultOpenKeys={[open]}
                     mode="inline"
                     theme="dark"
                 >
